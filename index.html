@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login Page</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+      h2 {
+        color: #333;
+      }
+      form {
+        max-width: 300px;
+        margin: 0 auto;
+      }
+      .font {
+        text-align: left;
+        color: black;
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+      }
+      button {
+        background-color: #0074d9;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Login</h2>
+    <form>
+      <div class="font">Email</div>
+      <input type="text" id="email" placeholder="Email" /> <br />
+      <div class="font">Password</div>
+      <input type="password" id="password" placeholder="Password" /><br /><br />
+      <button type="button" onclick="login()">Submit</button>
+    </form>
+
+    <script>
+      function login() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        // You can add code here to send a request to the server for authentication
+        // For simplicity, we will use a static JSON data array
+        const users = [
+          { email_id: "sample@gmail.com", password: "1234" },
+          { email_id: "sample1@gmail.com", password: "9876" },
+        ];
+        const user = users.find(
+          (u) => u.email_id === email && u.password === password
+        );
+        if (user) {
+          alert("successful login");
+          // Successful login, redirect to the home page
+          window.location.href = "home.html";
+        } else {
+          alert("Invalid credentials. Please try again.");
+        }
+      }
+    </script>
+  </body>
+</html>

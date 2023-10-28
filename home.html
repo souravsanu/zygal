@@ -1,0 +1,169 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>Home Page-2</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+      h2 {
+        color: #333;
+      }
+      .font {
+        text-align: left;
+        color: #666;
+      }
+      input {
+        width: 30%;
+        padding: 10px;
+        margin: 5px 0;
+      }
+      button {
+        background-color: #0074d9;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Welcome to the Home Page</h2>
+    <div class="">Submit text message</div>
+
+    <input type="text" id="dataInput" placeholder="Enter data" /><br />
+    <button onclick="saveData()">Submit(button 1)</button> <br />
+    <input type="text" id="searchInput" placeholder="Search data" /><br />
+
+    <button onclick="searchData()">Search (button 2)</button><br /><br />
+    <button onclick="clearCookies()">Clear Cookies</button><br /><br />
+    <button onclick="logout()">Logout</button><br />
+
+    <script>
+      function saveData() {
+        const data = document.getElementById("dataInput").value;
+        document.cookie =
+          "userData=" +
+          data +
+          "; expires=" +
+          new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString();
+      }
+      function searchData() {
+        const searchStr = document.getElementById("searchInput").value;
+        const cookies = document.cookie.split(";");
+        let found = false;
+        for (const cookie of cookies) {
+          const [name, value] = cookie.split("=");
+          if (name === "userData" && value.includes(searchStr)) {
+            // Display the matching data in a pop-up message
+            alert("Matching data found: " + value);
+            found = true;
+          }
+        }
+        if (!found) {
+          alert("No matching data found.");
+        }
+      }
+
+      function clearCookies() {
+        document.cookie =
+          "userData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      }
+
+      function logout() {
+        // Redirect to the login page
+        window.location.href = "index.html";
+      }
+    </script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home Page</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+      h2 {
+        color: #333;
+      }
+      .font {
+        text-align: left;
+        color: #666;
+      }
+      input {
+        width: 30%;
+        padding: 10px;
+        margin: 5px 0;
+      }
+      button {
+        background-color: #0074d9;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Welcome to the Home Page</h2>
+    <div class="font">Submit text message</div>
+
+    <input type="text" id="dataInput" placeholder="Enter data" /><br />
+    <button onclick="saveData()">Submit (button 1)</button> <br />
+    <div class="font">Search data</div>
+    <input type="text" id="searchInput" placeholder="Search data" /><br />
+
+    <button onclick="searchData()">Search (button 2)</button><br /><br />
+    <button onclick="clearCookies()">Clear Cookies</button><br /><br />
+    <button onclick="logout()">Logout</button><br />
+
+    <script>
+      function saveData() {
+        const data = document.getElementById("dataInput").value;
+        // Store the data in a cookie with an expiration of 1 day
+        document.cookie =
+          "userData=" +
+          encodeURIComponent(data) +
+          "; expires=" +
+          new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString();
+      }
+
+      function searchData() {
+        const searchStr = document.getElementById("searchInput").value;
+        const cookies = document.cookie.split(";");
+        let found = false;
+        for (const cookie of cookies) {
+          const [name, value] = cookie.trim().split("=");
+          if (name === "userData") {
+            // Decode the cookie value
+            const decodedValue = decodeURIComponent(value);
+            if (decodedValue.includes(searchStr)) {
+              // Display the matching data in a pop-up message
+              alert("Matching data found: " + decodedValue);
+              found = true;
+            }
+          }
+        }
+        if (!found) {
+          alert("No matching data found.");
+        }
+      }
+
+      function clearCookies() {
+        // Remove the userData cookie by setting its expiration to the past
+        document.cookie =
+          "userData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      }
+
+      function logout() {
+        // Redirect to the login page
+        window.location.href = "index.html";
+      }
+    </script>
+  </body>
+</html>
